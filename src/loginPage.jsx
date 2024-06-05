@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { signIn, signUp } from "./authService";
 
 const LoginPage = () => {
@@ -95,6 +95,8 @@ const LoginPage = () => {
           ? "Already have an account? Sign In"
           : "Need an account? Sign Up"}
       </button>
+      <br />
+      <Link to="/forgot">Forgot Password?</Link>
     </div>
   );
 };

@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './loginPage';
 import HomePage from './homePage';
 import ConfirmUserPage from './confirmUserPage';
-import './App.css'
+import ForgotPassword from "./forgotPassword";
+import "./App.css";
 
 function App() {
   const isAuthenticated = () => {
@@ -15,10 +16,25 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={isAuthenticated() ? <Navigate replace to="/home" /> : <Navigate replace to="/login" />} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated() ? (
+              <Navigate replace to="/home" />
+            ) : (
+              <Navigate replace to="/login" />
+            )
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/confirm" element={<ConfirmUserPage />} />
-        <Route path="/home" element={isAuthenticated() ? <HomePage /> : <Navigate replace to="/login" />} />
+        <Route
+          path="/home"
+          element={
+            isAuthenticated() ? <HomePage /> : <Navigate replace to="/login" />
+          }
+        />
+        <Route path="/forgot" element={<ForgotPassword />} />
       </Routes>
     </BrowserRouter>
   );

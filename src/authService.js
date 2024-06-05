@@ -7,7 +7,8 @@ import {
   SignUpCommand,
   ConfirmSignUpCommand,
   ForgotPasswordCommand,
-  ConfirmForgotPasswordCommand
+  ConfirmForgotPasswordCommand,
+  ResendConfirmationCodeCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
 import config from "./config.json";
 
@@ -120,6 +121,22 @@ export const confirmForgotPassword = async (
     return response;
   } catch (error) {
     console.error("Error confirming new password: ", error);
+    throw error;
+  }
+};
+
+export const resendConfirmationCode = async (email) => {
+  const params = {
+    ClientId: config.clientId,
+    Username: email,
+  };
+  try {
+    const command = new ResendConfirmationCodeCommand(params);
+    const response = await cognitoClient.send(command);
+    console.log("Resend code request sent: ", response);
+    return response;
+  } catch (error) {
+    console.error("Error resending code: ", error);
     throw error;
   }
 };

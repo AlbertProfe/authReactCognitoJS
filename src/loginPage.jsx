@@ -88,14 +88,15 @@ const LoginPage = () => {
             />
           </div>
         )}
-        <button type="submit">{isSignUp ? "Sign Up" : "Sign In"}</button>
+        <button type="submit">{isSignUp ? "Sign Up" : "Sign In"}</button> <br />{" "}
+        <br />
       </form>
       <button onClick={() => setIsSignUp(!isSignUp)}>
         {isSignUp
           ? "Already have an account? Sign In"
           : "Need an account? Sign Up"}
       </button>
-      <br />
+      <br /> <br />
       <Link to="/forgot">Forgot Password?</Link>
     </div>
   );

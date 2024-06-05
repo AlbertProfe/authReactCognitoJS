@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { forgotPassword, confirmForgotPassword } from "./authService";
+import {
+  forgotPassword,
+  confirmForgotPassword,
+  resendConfirmationCode,
+} from "./authService";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -34,6 +38,16 @@ const ForgotPassword = () => {
     }
   };
 
+  const handleResendCode = async (e) => {
+    e.preventDefault();
+    try {
+      await resendConfirmationCode(email);
+      alert("Confirmation code resent successfully!");
+    } catch (error) {
+      alert(`Failed to resend code: ${error}`);
+    }
+  };
+
   return (
     <div className="forgotPasswordForm">
       <h2>Forgot Password</h2>
@@ -48,7 +62,8 @@ const ForgotPassword = () => {
               placeholder="Email"
               required
             />
-          </div>
+          </div>{" "}
+          <br />
           <button type="submit">Send Code</button>
         </form>
       ) : (
@@ -73,7 +88,8 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <button type="submit">Reset Password</button>
+          <button type="submit">Reset Password</button> <br /> 
+          <button onClick={handleResendCode}>Resend Code</button>
         </form>
       )}
     </div>
